@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS namastecards_dev;
-CREATE DATABASE namaste_dev;
+CREATE DATABASE namastecards_dev;
 
-\c namaste_dev;
+\c namastecards_dev;
 
 CREATE TABLE namastecards (
  id SERIAL PRIMARY KEY,
@@ -9,8 +9,7 @@ CREATE TABLE namastecards (
  message VARCHAR(300) NOT NULL ,
  sender TEXT,
  reciver TEXT,
- img TEXT,
- date INT DEFAULT NULL,
+ image TEXT,
  is_favorite BOOLEAN
 );
 
