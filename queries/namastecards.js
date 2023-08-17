@@ -2,8 +2,9 @@
 const db = require("../db/dbConfig");
 
 //ALL NAMASTECARDS
-const getallNamasteCards = async () => {
-    try {const allCards = await db.any("SELECT * FROM namastecards")
+const getallCards = async () => {
+    try {
+        const allCards = await db.any("SELECT * FROM namastecards")
         return allCards;
     } catch(error){
         console.error("Error executing the querry:", error)
@@ -11,7 +12,7 @@ const getallNamasteCards = async () => {
 }
 
 //SHOW: ONE 
-const getNamasteCards = async (id) => {
+const getCards = async (id) => {
     try {
         const oneCard = await db.one("SELECT * FROM namastecards WHERE id=$1", id);
         return oneCard;
@@ -24,12 +25,12 @@ const getNamasteCards = async (id) => {
 const createCard = async (card) => {
     try {
         const newCard = await db.one(
-            "INSERT INTO quotes (category, message, sender, reciver, image, is_favorite) VALUES($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO namastecards (category, message, sender, reciver, image, is_favorite) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
             [
                 card.category,
                 card.message,
                 card.sender,
-                card.name,
+                card.reciver,
                 card.image,
                 card.is_favorite,  
             ]
@@ -56,11 +57,28 @@ const deleteCard = async (id) => {
 const updateCard = async (id, card) => {
     try {
       const updatedCard = await db.one(
-        "UPDATE namastecard SET category=$1, message=$2, sender=$3, reciver=$4, image=$5, is_favorite=$6 where id=$7 RETURNING *",
-        [card.category, card.message, card.sender,card.reciver,card.image, card.is_favorite, id]
+        "UPDATE namastecards SET category=$1, message=$2, sender=$3, reciver=$4, image=$5, is_favorite=$6 where id=$7 RETURNING *",
+        [
+            card.category,
+            card.message,
+            card.sender,
+            card.reciver,
+            card.image,
+            card.is_favorite,
+            id
+        ]
       );
       return updatedCard;
     }catch(error) {
       return error;
     }
   };
+
+
+module.exports = {
+    getallCards,
+    getCards,
+    createCard,
+    updateCard,
+    deleteCard,
+};

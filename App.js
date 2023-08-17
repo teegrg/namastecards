@@ -14,6 +14,11 @@ app.get("/", (req, res) => {
     res.status(200).send("wellcome")
 })
 
+//CARDS ROUTE
+const cardsController = require("./controllers/cardsController.js")
+app.use("/cards", cardsController);
+
+
 //404 PAGE
 app.get("*", (req, res) => {
     res.status(404).send("ooops, page not found")
