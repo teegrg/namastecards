@@ -25,14 +25,17 @@ const getCards = async (id) => {
 const createCard = async (card) => {
     try {
         const newCard = await db.one(
-            "INSERT INTO namastecards (category, message, sender, reciver, image, is_favorite) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO namastecards (company, tag, name, email, phone, cell, address, linkedin, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
             [
-                card.category,
-                card.message,
-                card.sender,
-                card.reciver,
-                card.image,
-                card.is_favorite,  
+                card.company,
+                card.tag,
+                card.name,
+                card.email,
+                card.phone,
+                card.cell,  
+                card.address,  
+                card.linkedin,  
+                card.image,  
             ]
         );
         return newCard;
@@ -57,14 +60,16 @@ const deleteCard = async (id) => {
 const updateCard = async (id, card) => {
     try {
       const updatedCard = await db.one(
-        "UPDATE namastecards SET category=$1, message=$2, sender=$3, reciver=$4, image=$5, is_favorite=$6 where id=$7 RETURNING *",
+        "UPDATE namastecards SET company=$1, tag=$2, name=$3, email=$4, phone=$5, cell=$6, address=$7, linkedin=$8, image=$9 where id=$10 RETURNING *",
         [
-            card.category,
-            card.message,
-            card.sender,
-            card.reciver,
+            card.company,
+            card.name,
+            card.email,
+            card.phone,
+            card.cell,
+            card.address,
+            card.linkedin,
             card.image,
-            card.is_favorite,
             id
         ]
       );
