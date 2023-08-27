@@ -63,6 +63,7 @@ const updateCard = async (id, card) => {
         "UPDATE namastecards SET company=$1, tag=$2, name=$3, email=$4, phone=$5, cell=$6, address=$7, linkedin=$8, image=$9 where id=$10 RETURNING *",
         [
             card.company,
+            card.tag,
             card.name,
             card.email,
             card.phone,
@@ -70,7 +71,7 @@ const updateCard = async (id, card) => {
             card.address,
             card.linkedin,
             card.image,
-            id
+            id,
         ]
       );
       return updatedCard;
