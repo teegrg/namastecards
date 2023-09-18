@@ -16,3 +16,12 @@ CREATE TABLE namastecards (
  image TEXT
 );
 
+DROP TABLE IF EXISTS reviews;
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    reviewer TEXT,
+    content TEXT,
+    rating NUMERIC,
+    CHECK (rating >= 0 AND rating <= 5)
+)
