@@ -18,6 +18,9 @@ app.get("/", (req, res) => {
 const cardsController = require("./controllers/cardsController.js")
 app.use("/cards", cardsController);
 
+//REVIEW ROUTE
+const reviewsController = require("./controllers/reviewsController.js")
+app.use("/reviews", reviewsController);
 
 //404 PAGE
 app.get("*", (req, res) => {

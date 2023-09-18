@@ -31,7 +31,7 @@ cards.get("/:id", async(req, res) => {
     if(card.id){
         res.json(card);
     } else {
-        res.json({error:"song not found with id"})
+        res.json({error:"card found with id"})
     }
 });
 
